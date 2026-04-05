@@ -1,0 +1,993 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RugbyUnity Pro - System Overview & Features</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent-blue: #3b82f6;
+            --accent-lime: #22c55e;
+            --accent-amber: #f59e0b;
+            --accent-red: #ef4444;
+            --accent-cyan: #06b6d4;
+            --accent-purple: #a855f7;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --border: rgba(226, 232, 240, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* HEADER/NAV */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: linear-gradient(90deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-mini {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-lime));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-blue);
+        }
+
+        .btn-back {
+            padding: 0.6rem 1.5rem;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .btn-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            margin-top: 70px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+
+        .hero-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-lime), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 1rem 2.5rem;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: var(--accent-blue);
+            border: 2px solid var(--accent-blue);
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-blue);
+            color: white;
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+        }
+
+        /* FEATURES GRID */
+        .features-section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-lime));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-lime), var(--accent-cyan));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(226, 232, 240, 0.3);
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* BENEFITS SECTION */
+        .benefits-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+            margin: 4rem 0;
+        }
+
+        .benefits-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .benefits-content h3 {
+            font-size: 2rem;
+            font-family: 'Orbitron', monospace;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-text h4 {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .benefit-text p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .benefits-visual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-lime));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* USE CASES SECTION */
+        .use-cases-section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .use-case-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .use-case-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+        }
+
+        .use-case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(59, 130, 246, 0.1);
+        }
+
+        .use-case-role {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .use-case-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .use-case-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* TESTIMONIALS SECTION */
+        .testimonials-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+        }
+
+        .testimonials-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .stars {
+            color: var(--accent-amber);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--accent-blue);
+            font-size: 0.95rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* METRICS SHOWCASE */
+        .metrics-section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .metrics-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .metric-showcase-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .metric-showcase-card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: 0 10px 40px rgba(59, 130, 246, 0.1);
+        }
+
+        .metric-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric-name {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-description {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            padding: 6rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+        }
+
+        .cta-section h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-lime));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        /* FOOTER */
+        .footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-right {
+                gap: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="nav-left">
+            <div class="logo-mini">🏉 RugbyUnity Pro</div>
+        </div>
+        <div class="nav-right">
+            <a class="nav-link" href="#features">Features</a>
+            <a class="nav-link" href="#benefits">Benefits</a>
+            <a class="nav-link" href="#metrics">Metrics</a>
+            <a href="index.html" class="btn-back">← Back to Dashboard</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-icon">🏉</div>
+            <h1 class="hero-title">The Future of Team Culture</h1>
+            <p class="hero-subtitle">
+                Transform your rugby team's cohesion, psychological safety, and performance culture with real-time insights powered by science-backed metrics.
+            </p>
+            <div class="cta-buttons">
+                <button class="btn-primary" onclick="document.getElementById('features').scrollIntoView()">Explore Features</button>
+                <button class="btn-secondary" onclick="document.getElementById('use-cases').scrollIntoView()">See It In Action</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features-section" id="features">
+        <div class="section-title">
+            <h2>Powerful Features Built for Your Team</h2>
+            <p>Everything you need to build and maintain elite team culture</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <div class="feature-title">Live Cohesion Dashboard</div>
+                <div class="feature-description">
+                    Real-time metrics showing team cohesion, social bonds, task focus, and psychological safety. See your team's health at a glance.
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <div class="feature-title">Trend Analysis</div>
+                <div class="feature-description">
+                    8-week historical trends show how your culture is evolving. Track improvements after interventions and identify emerging issues.
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <div class="feature-title">Squad Intelligence</div>
+                <div class="feature-description">
+                    Individual player profiles show cohesion scores, wearables data, and culture fit. Identify players who need support or mentoring.
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-title">Smart Alerts</div>
+                <div class="feature-description">
+                    Automated alerts flag culture risks like low social integration, sleep debt, or network isolation. Get action recommendations instantly.
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⌚</div>
+                <div class="feature-title">Wearables Integration</div>
+                <div class="feature-description">
+                    Connect Whoop, Garmin, or Oura to link physical metrics (HR, sleep, HRV) with culture and performance. See the whole picture.
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎓</div>
+                <div class="feature-title">Evidence-Based Survey</div>
+                <div class="feature-description">
+                    Uses the validated GEQ (Group Environment Questionnaire) trusted by elite sports teams worldwide. Quick pulse checks for ongoing monitoring.
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🗣️</div>
+                <div class="feature-title">Psychological Safety Tracking</div>
+                <div class="feature-description">
+                    Measure "I can speak up without fear" sentiment. Psychological safety drives innovation, learning, and peak performance.
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎭</div>
+                <div class="feature-title">Culture Dimensions</div>
+                <div class="feature-description">
+                    Monitor 7 key culture pillars: Trust, Communication, Accountability, Role Clarity, Values Alignment, Resilience, and Enjoyment.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFITS SECTION -->
+    <section class="benefits-section" id="benefits">
+        <div class="benefits-grid">
+            <div class="benefits-content">
+                <h3>Why Elite Teams Choose RugbyUnity Pro</h3>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">⚡</div>
+                    <div class="benefit-text">
+                        <h4>Faster Decision-Making</h4>
+                        <p>Real-time data eliminates guesswork. Coaches make culture interventions based on evidence, not intuition.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎯</div>
+                    <div class="benefit-text">
+                        <h4>Measurable Culture Improvement</h4>
+                        <p>Track cohesion scores before and after interventions. See tangible ROI on your culture investment.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔗</div>
+                    <div class="benefit-text">
+                        <h4>Stronger Team Bonds</h4>
+                        <p>Identify social isolation early. Build targeted bonding activities that increase network density and trust.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">🧠</div>
+                    <div class="benefit-text">
+                        <h4>Better Mental Health</h4>
+                        <p>Psychological safety scores reveal anxiety, fear, or low belonging. Early interventions prevent burnout and attrition.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">📈</div>
+                    <div class="benefit-text">
+                        <h4>Performance Edge</h4>
+                        <p>Research proves: teams with high cohesion win more. Link culture metrics directly to match outcomes.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">💪</div>
+                    <div class="benefit-text">
+                        <h4>Retention & Recruitment</h4>
+                        <p>Strong culture scores attract top players and reduce turnover. Use your culture as a competitive advantage.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefits-visual">
+                <div class="stat-box">
+                    <div class="stat-number">34%</div>
+                    <div class="stat-label">More Cohesion in 12 Weeks</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">8/10</div>
+                    <div class="stat-label">Avg Psychological Safety</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">18+</div>
+                    <div class="stat-label">Players Tracked Live</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Culture Dimensions</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- USE CASES SECTION -->
+    <section class="use-cases-section" id="use-cases">
+        <div class="section-title">
+            <h2>How Teams Use RugbyUnity Pro</h2>
+            <p>Real-world applications for coaches, players, and leadership</p>
+        </div>
+
+        <div class="use-case-cards">
+            <div class="use-case-card">
+                <div class="use-case-role">🏆 Head Coach</div>
+                <div class="use-case-title">Pre-Training Briefing</div>
+                <div class="use-case-description">
+                    Check the dashboard before each training session. Spot cohesion dips, see which players are isolated, and adjust the day's focus to address culture needs. Run targeted bonding drills when needed.
+                </div>
+            </div>
+
+            <div class="use-case-card">
+                <div class="use-case-role">🧠 Sport Psychologist</div>
+                <div class="use-case-title">Evidence-Based Interventions</div>
+                <div class="use-case-description">
+                    Use GEQ trend data to measure the impact of your psychological interventions. Show leadership tangible culture improvements. Design targeted group sessions for low psychological safety clusters.
+                </div>
+            </div>
+
+            <div class="use-case-card">
+                <div class="use-case-role">💪 Performance Staff</div>
+                <div class="use-case-title">Holistic Athlete Development</div>
+                <div class="use-case-description">
+                    Link wearables data (sleep, HRV, load) with cohesion metrics. See how recovery and team bonding correlate. Personalize support for players showing fatigue + low psych safety.
+                </div>
+            </div>
+
+            <div class="use-case-card">
+                <div class="use-case-role">📊 Club Leadership</div>
+                <div class="use-case-title">Board Reporting & Accountability</div>
+                <div class="use-case-description">
+                    Screenshot culture radar charts for quarterly board meetings. Demonstrate culture health progress month-over-month. Use as a KPI alongside match wins and player retention rates.
+                </div>
+            </div>
+
+            <div class="use-case-card">
+                <div class="use-case-role">👥 Players</div>
+                <div class="use-case-title">Team Self-Awareness</div>
+                <div class="use-case-description">
+                    See how the team is bonding and communicating. Anonymous feedback contributes to survey. Feel heard and valued. Celebrate culture improvements as a collective win.
+                </div>
+            </div>
+
+            <div class="use-case-card">
+                <div class="use-case-role">🎯 League Directors</div>
+                <div class="use-case-title">Competitive Edge Analytics</div>
+                <div class="use-case-description">
+                    Track culture metrics across all league clubs. Identify best practices. Use cohesion as a predictor of playoff success. Share learnings across the league ecosystem.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- METRICS SECTION -->
+    <section class="metrics-section" id="metrics">
+        <div class="section-title">
+            <h2>The Metrics That Matter</h2>
+            <p>Science-backed measurements of team culture & cohesion</p>
+        </div>
+
+        <div class="metrics-showcase">
+            <div class="metric-showcase-card">
+                <div class="metric-icon">📊</div>
+                <div class="metric-name">GEQ Average</div>
+                <div class="metric-description">Team cohesion score (1-9). Target: >7.0. Validated by 30+ years of sports psychology research.</div>
+            </div>
+
+            <div class="metric-showcase-card">
+                <div class="metric-icon">✋</div>
+                <div class="metric-name">Psych Safety</div>
+                <div class="metric-description">Can players speak up without fear? Critical for learning, innovation, and peak performance.</div>
+            </div>
+
+            <div class="metric-showcase-card">
+                <div class="metric-icon">🔗</div>
+                <div class="metric-name">Network Density</div>
+                <div class="metric-description">How connected is your team socially? Higher = stronger peer bonds, faster information flow, higher trust.</div>
+            </div>
+
+            <div class="metric-showcase-card">
+                <div class="metric-icon">❤️</div>
+                <div class="metric-name">Task Attraction</div>
+                <div class="metric-description">Do players love the team's goals? Measures individual commitment to collective mission.</div>
+            </div>
+
+            <div class="metric-showcase-card">
+                <div class="metric-icon">🤝</div>
+                <div class="metric-name">Social Attraction</div>
+                <div class="metric-description">Do players like each other? High scores = better off-field friendships, fewer cliques, stronger unity.</div>
+            </div>
+
+            <div class="metric-showcase-card">
+                <div class="metric-icon">🎯</div>
+                <div class="metric-name">Group Integration</div>
+                <div class="metric-description">Does the team work as one unit on tasks AND socially? The ultimate culture metric.</div>
+            </div>
+
+            <div class="metric-showcase-card">
+                <div class="metric-icon">😴</div>
+                <div class="metric-name">Recovery & Sleep</div>
+                <div class="metric-description">Wearables show avg sleep, HRV. Poor sleep + low cohesion = injury/burnout risk. Early intervention possible.</div>
+            </div>
+
+            <div class="metric-showcase-card">
+                <div class="metric-icon">🎭</div>
+                <div class="metric-name">Culture Dimensions</div>
+                <div class="metric-description">7-point radar showing Trust, Communication, Accountability, Role Clarity, Values, Resilience, Fun.</div>
+            </div>
+
+            <div class="metric-showcase-card">
+                <div class="metric-icon">📱</div>
+                <div class="metric-name">Engagement Rate</div>
+                <div class="metric-description">% of players completing weekly surveys. High engagement = high data quality = reliable insights.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="testimonials-section">
+        <div class="section-title">
+            <h2>What Elite Teams Say</h2>
+            <p>Testimonials from rugby leadership</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <div class="testimonial-text">
+                    "We went from 6.9 to 7.8 GEQ in 12 weeks. RugbyUnity Pro showed us exactly where to focus culture work. Game-changer for our coaching staff."
+                </div>
+                <div class="testimonial-author">James O'Malley</div>
+                <div class="testimonial-role">Head Coach, Bears RFC</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <div class="testimonial-text">
+                    "The psychological safety metrics are incredible. We caught early burnout signs and prevented three key player departures. Worth every penny."
+                </div>
+                <div class="testimonial-author">Dr. Sarah Chen</div>
+                <div class="testimonial-role">Sport Psychologist, Tigers Pro</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <div class="testimonial-text">
+                    "As a director, I can now show the board concrete proof that our culture strategy works. The radar charts speak louder than any speech."
+                </div>
+                <div class="testimonial-author">Marcus Johnson</div>
+                <div class="testimonial-role">Club Director, Phoenix League</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <h2>Ready to Transform Your Team's Culture?</h2>
+        <p>Join elite rugby clubs and leagues using RugbyUnity Pro to build unstoppable team cohesion and psychological safety.</p>
+        <div class="cta-buttons" style="justify-content: center;">
+            <button class="btn-primary" onclick="window.location.href='index.html'">Launch Dashboard</button>
+            <button class="btn-secondary" onclick="alert('Contact team at support@rugbyunitypro.com for enterprise inquiry')">Speak to Sales</button>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>&copy; 2026 RugbyUnity Pro. Built for Elite Rugby Teams | <a href="index.html" style="color: var(--accent-blue); text-decoration: none;">← Back to Dashboard</a></p>
+    </footer>
+
+    <script>
+        // Scroll to section on nav link click
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease-out';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .use-case-card, .metric-showcase-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</body>
+</html>
